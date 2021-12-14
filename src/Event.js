@@ -13,12 +13,12 @@ class Event extends Component {
   render() {
     const { event } = this.props;
     const { collapsed } = this.state;
-    return <div>
-      <span className="date">{event.start.dateTime}</span>
-      <span className="summary">{event.summary}</span>
-      <span className="location">{event.location}</span>
-      <span className="status">{event.status}</span>
-      <button className="details-button" onClick={this.handleClick}>
+    return <div className="event">
+      <p className="summary">{event.summary}</p>
+      <p className="start-date">{event.start.dateTime}</p>
+      <p className="location">{event.location}</p>
+      <p className="status">{event.status}</p>
+      <button className="details-btn" onClick={this.handleClick}>
         {collapsed ? "Show Details" : "Hide"} </button>
     </div>;
 

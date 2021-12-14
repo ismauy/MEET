@@ -10,7 +10,7 @@ describe('<Event /> component', () => {
         EventWrapper = shallow(<Event event={event} />);
     });
     test('render date label', () => {
-        expect(EventWrapper.find('.date')).toHaveLength(1);
+        expect(EventWrapper.find('.start-date')).toHaveLength(1);
     });
     test('render summary label', () => {
         expect(EventWrapper.find('.summary')).toHaveLength(1);
@@ -28,14 +28,14 @@ describe('<Event /> component', () => {
         EventWrapper.setState({
             collapsed: true,
         });
-        EventWrapper.find('.details-button').simulate('click')
+        EventWrapper.find('.details-btn').simulate('click')
         expect(EventWrapper.state('collapsed')).toBe(false);
     });
     test('user can collapse an event to hide its details', () => {
         EventWrapper.setState({
             collapsed: false,
         });
-        EventWrapper.find('.details-button').simulate('click')
+        EventWrapper.find('.details-btn').simulate('click')
         expect(EventWrapper.state('collapsed')).toBe(true);
     });
 });
