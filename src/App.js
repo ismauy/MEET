@@ -36,7 +36,7 @@ class App extends Component {
     this.mounted = false;
   }
 
-  updateEvents = (location, numberOfEvents) => {
+  updateEvents = (location) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
         events :
@@ -59,10 +59,10 @@ class App extends Component {
       });
     } else {
       this.setState({
-        errorText: "",
+        errorMsg: "",
         numberOfEvents: newNumber,
       });
-      this.updateEvents(this.state.currentLocation, this.state.numberOfEvents);
+      this.updateEvents(this.state.currentLocation);
     }
   };
 

@@ -71,4 +71,32 @@ describe('<App /> integration', () => {
     expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(32);
     AppWrapper.unmount();
   });
+  test('user changes number of events to a number less than or equal to 32', () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    const AppEventsState = AppWrapper.state('events');
+    const eventObject = { target: { value: 16 } };
+    NumberOfEventsWrapper.find('.number-events').simulate('change', eventObject);
+    expect(AppEventsState.length).toBeLessThanOrEqual(16);
+    AppWrapper.unmount();
+  });
+  test('user changes number of events to a number greater than 32', () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    const eventObject = { target: { value: 33 } };
+    NumberOfEventsWrapper.find('.number-events').simulate('change', eventObject);
+    const AppNumberOfEventsState = AppWrapper.state('numberOfEvents');
+    expect(AppNumberOfEventsState).toBe(0);
+    AppWrapper.unmount();
+  });
+  test('user changes number of events to a number less than 0', () => {
+    const AppWrapper = mount(<App />);
+    const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
+    const eventObject = { target: { value: -5 } };
+    NumberOfEventsWrapper.find('.number-events').simulate('change', eventObject);
+    const AppNumberOfEventsState = AppWrapper.state('numberOfEvents');
+    expect(AppNumberOfEventsState).toBe(0);
+    AppWrapper.unmount();
+  });
 });
+
