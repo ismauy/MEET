@@ -6,7 +6,7 @@ class Event extends Component {
   }
   handleClick = () => {
     this.setState({
-      collapsed: !this.state.collapsed,
+      collapsed: !this.state.collapsed
     });
   }
 
@@ -18,6 +18,7 @@ class Event extends Component {
       <p className="start-date">{event.start.dateTime}</p>
       <p className="location">{event.location}</p>
       <p className="status">{event.status}</p>
+      {!collapsed && (<div className="event__Details"><p>{event.description}</p></div>)}
       <button className="details-btn" onClick={this.handleClick}>
         {collapsed ? "Show Details" : "Hide"} </button>
     </div>;

@@ -32,6 +32,7 @@ describe('<App /> integration', () => {
     expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
     AppWrapper.unmount();
   });
+
   test('App passes "locations" state as a prop to CitySearch', () => {
     const AppWrapper = mount(<App />);
     const AppLocationsState = AppWrapper.state('locations');
@@ -39,6 +40,7 @@ describe('<App /> integration', () => {
     expect(AppWrapper.find(CitySearch).props().locations).toEqual(AppLocationsState);
     AppWrapper.unmount();
   });
+
   test('get list of events matching the city selected by the user', async () => {
     const AppWrapper = mount(<App />);
     const CitySearchWrapper = AppWrapper.find(CitySearch);
@@ -53,6 +55,7 @@ describe('<App /> integration', () => {
     expect(AppWrapper.state('events')).toEqual(eventsToShow);
     AppWrapper.unmount();
   });
+
   test('get list of all events when user selects "See all cities"', async () => {
     const AppWrapper = mount(<App />);
     const CitySearchWrapper = AppWrapper.find(CitySearch);
@@ -64,6 +67,7 @@ describe('<App /> integration', () => {
     expect(AppWrapper.state('events')).toEqual(allEvents);
     AppWrapper.unmount();
   });
+
   test('change NumberOfEvents state to 32', () => {
     const AppWrapper = mount(<App />);
     const AppNumberOfEventsState = AppWrapper.state('numberOfEvents');
@@ -80,22 +84,34 @@ describe('<App /> integration', () => {
     expect(AppEventsState.length).toBeLessThanOrEqual(16);
     AppWrapper.unmount();
   });
+
   test('user changes number of events to a number greater than 32', () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: 33 } };
     NumberOfEventsWrapper.find('.number-events').simulate('change', eventObject);
+    AppWrapper.update();
     const AppNumberOfEventsState = AppWrapper.state('numberOfEvents');
     expect(AppNumberOfEventsState).toBe(0);
     AppWrapper.unmount();
   });
+
   test('user changes number of events to a number less than 0', () => {
     const AppWrapper = mount(<App />);
     const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents);
     const eventObject = { target: { value: -5 } };
     NumberOfEventsWrapper.find('.number-events').simulate('change', eventObject);
+    AppWrapper.update();
     const AppNumberOfEventsState = AppWrapper.state('numberOfEvents');
     expect(AppNumberOfEventsState).toBe(0);
+    AppWrapper.unmount();
+  });
+
+  test('User changes number of events and App passes "events" state as a prop to EventList', () => {
+    const AppWrapper = mount(<App />);
+    const AppEventsState = AppWrapper.state('events');
+    expect(AppEventsState).not.toEqual(undefined);
+    expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
     AppWrapper.unmount();
   });
 });
