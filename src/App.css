@@ -128,10 +128,12 @@ input[type="number"] {
   font-family: sans-serif;
 }
 
+/*
 .Alert {
   position: fixed;
-  top: 20px;
+  top: 5px;
 }
+*/
 
 .data-vis-wrapper {
   display: flex;
