@@ -2,6 +2,9 @@
 
 A serverless, progressive web application (PWA) with React using a test-driven development (TDD) technique. It uses the Google Calendar API to fetch upcoming events.
 
+## Live Version
+https://ismauy.github.io/meet/
+
 ## USER STORIES AND SCENARIOS 
 
 **Feature 1 : Filter events by city**
